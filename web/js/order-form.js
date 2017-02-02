@@ -20,8 +20,6 @@ halumein.orderFormWidget = {
         $orderFormBlock = $('[data-role=order-form-container]');
         $orderAddationalFields = $('[data-role=order-additional-fields]');
 
-
-
         $paymentForm = $('[data-role=payment-form]');
         $paymentConfirm = $('[data-role=payment-confirm]');
         $paymentCancel = $('[data-role=payment-cancel]');
@@ -220,6 +218,7 @@ halumein.orderFormWidget = {
         $orderFormComment.val('');
         $orderAddationalFields.find('input').val('');
 
+        // блок формы оплаты
         $paymentChangeNotice.html(0)
         $paymentSumInput.val('').data('less', false);;
         $paymentComment.val('');
