@@ -1,0 +1,29 @@
+.order-form-widget {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+.order-create-button {
+    width: 100%;
+}
+
+.order-form-container {
+    /*width: 270px;*/
+    width: 90%;
+    height: 400px;
+    display: inline-block;
+}
+
+#payment-notice {
+    color: red;
+}
+
+.payment-form .payment-change {
+	font-size: 13px;
+}
+
+.payment-form .text-danger {
+	position: absolute;
+	line-height: 14px;
+}
