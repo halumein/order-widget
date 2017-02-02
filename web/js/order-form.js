@@ -7,16 +7,20 @@ halumein.orderFormWidget = {
         console.log('order form widget init');
 
         $clientFormBlock = $('[data-role=client-form-container]');
+        $clientGosNomerSelect = $('[data-role=gos-nomer]');
+
+        $stafferFormBlock = $('[data-role=staffer-form-container]');
+
         $settings = $('[data-role=settings]');
-
-
-
 
         $orderForm = $('[data-role=order-form]');
         $orderFormComment = $('[data-role=order-comment]');
         $orderPaymentTypeSelect = $('[data-role=payment-type-select]');
         $orderSubmit = $('[data-role=order-submit]');
         $orderFormBlock = $('[data-role=order-form-container]');
+        $orderAddationalFields = $('[data-role=order-additional-fields]');
+
+
 
         $paymentForm = $('[data-role=payment-form]');
         $paymentConfirm = $('[data-role=payment-confirm]');
@@ -35,8 +39,13 @@ halumein.orderFormWidget = {
 
 
         $orderSubmit.on('click', function() {
+            $orderSubmit.prop("disabled", true);
             if (+$('.pistol88-cart-count').html() > 0) {
                 halumein.orderFormWidget.orderCreate($orderForm);
+            } else {
+                setTimeout(function() {
+                    $orderSubmit.prop("disabled", false);
+                }, 2000);
             }
         });
 
@@ -79,11 +88,17 @@ halumein.orderFormWidget = {
 		});
 
         $paymentConfirm.on('click', function() {
+
+            $paymentConfirm.prop("disabled", true);
+
             var sum = +$paymentSumInput.val();
             var cost = +$paymentFormOrderCostInput.val();
 
             if ($paymentSumInput.data('less') === false && sum < cost && $paymentComment.val() === '') {
                 $paymentNoticeBlock.html('Напишите в комментарии почему сумма платежа меньше стоимости заказа');
+                setTimeout(function() {
+                    $paymentConfirm.prop("disabled", false);
+                }, 2000);
             } else {
                 halumein.orderFormWidget.paymentConfirm($paymentForm);
             }
@@ -102,14 +117,16 @@ halumein.orderFormWidget = {
         var sendUrl = $form.attr('action'),
             serializedFormData = $form.serialize(),
             paymentRequire = $($settings).data('payment');
-
         $.ajax({
             type : 'POST',
             url : sendUrl,
             data : serializedFormData,
             success : function(response) {
                 if (response.status === 'success') {
+
                     if (response.paymentRequire && paymentRequire) {
+                        console.log('paymentRequire');
+
                         $paymentFormOrderIdInput.val(response.orderId);
                         $paymentFormOrderCostInput.val(response.orderCost);
                         $paymentTypeIdInput.val(response.paymentTypeId);
@@ -181,27 +198,36 @@ halumein.orderFormWidget = {
         $('.pistol88-cart-informer').find('.pistol88-cart-price').find("span").html('0');
         $('.pistol88-cart-informer').find('.pistol88-cart-price').find("s").remove();
 
-        // чистим блок промо
+        // чистим блоки маркетинга
         halumein.orderFormWidget.clearPromocode();
 
 
 
+        $orderSubmit.prop("disabled", false);
+        $paymentConfirm.prop("disabled", false);
+
+        // блок "клиент"
         $clientFormBlock.find('input').val('');
         $clientFormBlock.removeClass('in');
+        $clientGosNomerSelect.prop("selectedIndex",0);
 
+        // блок "Работник"
+        $stafferFormBlock.removeClass('in');
+        $stafferFormBlock.find('[type="checkbox"]').prop('checked', true);
 
-        // на мойках шоукейс пока не используется
-        // halumein.showcase.renderTargetContent('main');
-        // удаляем все хлебные крошки кроме главной
-        // $('[data-role=breadcrumbs]').find('[data-target=main]').nextAll().remove();
-
+        // блок заказ
         $orderPaymentTypeSelect.prop("selectedIndex",0);
         $orderFormComment.val('');
+        $orderAddationalFields.find('input').val('');
 
         $paymentChangeNotice.html(0)
         $paymentSumInput.val('').data('less', false);;
         $paymentComment.val('');
         $paymentNoticeBlock.html('');
+
+
+        // и костылик (так делать - фу)
+        $('[name=service-ident]').val('');
     },
     clearPromocode: function() {
         var form = $('[data-role=promocode-enter-form]');
@@ -210,6 +236,7 @@ halumein.orderFormWidget = {
             return false;
         }
 
+        // тут всё спизжено из модуля промокодов
         var data = $(form).serialize();
         data = data+'&clear=1';
 

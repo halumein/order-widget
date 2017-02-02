@@ -1,5 +1,5 @@
 <?php
-namespace backend\widgets\orderForm\assets;
+namespace app\widgets\orderForm\assets;
 
 use yii\web\AssetBundle;
 

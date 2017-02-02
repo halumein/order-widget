@@ -1,5 +1,5 @@
 <?php
-namespace backend\widgets\orderForm;
+namespace app\widgets\orderForm;
 
 use pistol88\order\models\Order;
 use pistol88\order\models\PaymentType;
@@ -17,7 +17,7 @@ class OrderForm extends \yii\base\Widget
 
     public function init()
     {
-        \backend\widgets\orderForm\assets\OrderFormAsset::register($this->getView());
+        \app\widgets\orderForm\assets\OrderFormAsset::register($this->getView());
 
         if (is_callable($this->staffer)) {
             $this->staffer = $this->staffer->__invoke();

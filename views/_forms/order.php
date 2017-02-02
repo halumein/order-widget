@@ -32,6 +32,7 @@ use yii\helpers\ArrayHelper;
                 <a class="heading collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
                     Клиент
                 </a>
+                <?=Html::a('<i class="glyphicon glyphicon-search"></i> Найти клиента', '#usersModal', ['id' => 'choose-user-id', 'class' => 'pull-right', 'data-toggle' => "modal", 'data-target' => "#usersModal"]);?>
             </h4>
         </div>
 
@@ -39,6 +40,9 @@ use yii\helpers\ArrayHelper;
             <div class="panel-body">
                 <?= \pistol88\order\widgets\ChooseClient::widget(['form' => $form, 'model' => $model]);?>
                 <?php $this->registerJs("pistol88.createorder.updateCartUrl = '".Url::toRoute(['/order-form/cart-info'])."';"); ?>
+                <select class="form-control service-choose-property">
+                    <option>Автомобиль...</option>
+                </select>
             </div>
         </div>
     </div>
