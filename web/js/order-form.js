@@ -176,6 +176,7 @@ halumein.orderFormWidget = {
         return false;
     },
 
+    // здесь не используется. лежит на будущее.
     clearCart : function() {
         $('.pistol88-cart').fadeOut('fast', function() {
             $(this).html('Корзина пуста').fadeIn()

@@ -40,7 +40,7 @@ use yii\helpers\ArrayHelper;
             <div class="panel-body">
                 <?= \pistol88\order\widgets\ChooseClient::widget(['form' => $form, 'model' => $model]);?>
                 <?php $this->registerJs("pistol88.createorder.updateCartUrl = '".Url::toRoute(['/order-form/cart-info'])."';"); ?>
-                <select class="form-control service-choose-property">
+                <select class="form-control service-choose-property" data-role="gos-nomer">
                     <option>Автомобиль...</option>
                 </select>
             </div>

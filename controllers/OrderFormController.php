@@ -49,6 +49,10 @@ class OrderFormController extends Controller
 
         $order = yii::$app->request->post('Order');
 
+        if (isset($order['staffer'])) {
+            $model->staffer = $order['staffer'];
+        }
+
         if ($model->load(yii::$app->request->post()) && $model->save()) {
 
             $module = Yii::$app->getModule('order');
