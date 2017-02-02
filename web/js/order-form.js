@@ -5,7 +5,7 @@ if (typeof halumein == "undefined" || !halumein) {
 halumein.orderFormWidget = {
     init : function() {
         console.log('order form widget init');
-
+        $certificate = $('[data-role=certificate-apply]');
         $clientFormBlock = $('[data-role=client-form-container]');
         $clientGosNomerSelect = $('[data-role=gos-nomer]');
 
@@ -35,6 +35,8 @@ halumein.orderFormWidget = {
         $paymentComment = $paymentForm.find('[data-role=payment-comment]');
         $paymentNoticeBlock = $paymentForm.find('[data-role=payment-notice]');
 
+        $certificateInput = $('[data-role=certificate-input]');
+        $paymentTypeId = $certificateInput.data('payment-type-id');
 
         $orderSubmit.on('click', function() {
             $orderSubmit.prop("disabled", true);
@@ -108,6 +110,15 @@ halumein.orderFormWidget = {
             halumein.orderFormWidget.backToPrimaryState();
         });
 
+        if ($paymentTypeId) {
+            $orderPaymentTypeSelect.val($paymentTypeId);
+        }
+
+        $(document).on("certificateUseSuccess", function(e, paymentTypeId){
+            if (paymentTypeId) {
+                $orderPaymentTypeSelect.val(paymentTypeId);
+            }
+        });
 
     },
 
@@ -199,7 +210,7 @@ halumein.orderFormWidget = {
 
         // чистим блоки маркетинга
         halumein.orderFormWidget.clearPromocode();
-
+        halumein.orderFormWidget.clearCertificate();
 
 
         $orderSubmit.prop("disabled", false);
@@ -228,6 +239,40 @@ halumein.orderFormWidget = {
 
         // и костылик (так делать - фу)
         $('[name=service-ident]').val('');
+    },
+
+    clearCertificate: function() {
+        var form = $('[data-role=certificate-enter-form]');
+
+        if ($(form).find('[data-role=certificate-input]').val() == '') {
+            return false;
+        }
+
+        var data = $(form).serialize();
+        data = data+'&clear=1';
+
+        jQuery.post($(form).attr('action'), data,
+            function(json) {
+                if(json.result == 'success') {
+                    $(form).find('input[type=text]').css({'border': '1px solid #ccc'}).val('');
+                    $(form).find('.certificate-discount').show('slow').html(json.message);
+
+                    setTimeout(function() { $('.certificate-discount').hide('slow'); }, 2300);
+
+                    if(json.informer) {
+                        $('.pistol88-cart-informer').replaceWith(json.informer);
+                    }
+                }
+                else {
+                    $(form).find('input[type=text]').css({'border': '1px solid red'});
+                    console.log(json.errors);
+                }
+
+                return true;
+
+            }, "json");
+
+        return false;
     },
     clearPromocode: function() {
         var form = $('[data-role=promocode-enter-form]');
