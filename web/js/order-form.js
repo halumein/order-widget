@@ -190,9 +190,10 @@ halumein.orderFormWidget = {
         $clientFormBlock.removeClass('in');
 
 
-        halumein.showcase.renderTargetContent('main');
+        // на мойках шоукейс пока не используется
+        // halumein.showcase.renderTargetContent('main');
         // удаляем все хлебные крошки кроме главной
-        $('[data-role=breadcrumbs]').find('[data-target=main]').nextAll().remove();
+        // $('[data-role=breadcrumbs]').find('[data-target=main]').nextAll().remove();
 
         $orderPaymentTypeSelect.prop("selectedIndex",0);
         $orderFormComment.val('');
