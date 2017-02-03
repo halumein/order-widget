@@ -95,7 +95,7 @@ use yii\helpers\ArrayHelper;
                          ]) ?>
                  </div>
                  <?php if($fields = $model->allfields) { ?>
-                     <div class="col-lg-12 col-xs-12">
+                     <div class="col-lg-12 col-xs-12" data-role="order-additional-fields">
                          <?php foreach($fields as $fieldModel) { ?>
                              <div class="col-lg-12 col-xs-12">
                                  <?php
