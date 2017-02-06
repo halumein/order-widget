@@ -86,13 +86,22 @@ use yii\helpers\ArrayHelper;
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <?= $form->field($model, 'date')->label(yii::t('order', 'Date'))->textInput(['value' => date('Y-m-d H:i:s')]) ?>
+                    <?= $form->field($model, 'date')->label(yii::t('order', 'Date'))->textInput(['value' => date('Y-m-d H:i:s'), 'data-role' => 'order-date']) ?>
                 </div>
                 <div class="col-lg-6 col-xs-6">
-                    <?= $form->field($model, 'is_assigment')->label(yii::t('order', 'Type'))->dropDownList(['0' => yii::t('order', 'Order'), '1' => yii::t('order', 'Assigment')]) ?>
+                    <?= $form->field($model, 'is_assigment')
+                        ->label(yii::t('order', 'Type'))
+                        ->dropDownList([
+                            '0' => yii::t('order', 'Order'),
+                            '1' => yii::t('order', 'Assigment')
+                        ], [
+                            'data-role' => 'is-assignment-select',
+                        ]); ?>
                 </div>
                 <div class="col-lg-6 col-xs-6">
-                    <?= $form->field($model, 'payment_type_id')->dropDownList($paymentTypes) ?>
+                    <?= $form->field($model, 'payment_type_id')->dropDownList($paymentTypes, [
+                        'data-role' => 'payment-type-select',
+                        ]) ?>
                 </div>
 
                  <div class="col-lg-12 col-xs-12">

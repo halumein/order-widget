@@ -14,8 +14,10 @@ halumein.orderFormWidget = {
         $settings = $('[data-role=settings]');
 
         $orderForm = $('[data-role=order-form]');
+        $orderDate = $('[data-role=order-date]');
         $orderFormComment = $('[data-role=order-comment]');
         $orderPaymentTypeSelect = $('[data-role=payment-type-select]');
+        $orderIsAssignmentSelect = $('[data-role=is-assignment-select]');
         $orderSubmit = $('[data-role=order-submit]');
         $orderFormBlock = $('[data-role=order-form-container]');
         $orderAddationalFields = $('[data-role=order-additional-fields]');
@@ -37,6 +39,12 @@ halumein.orderFormWidget = {
 
         $certificateInput = $('[data-role=certificate-input]');
         $paymentTypeId = $certificateInput.data('payment-type-id');
+
+        Number.prototype.padLeft = function(base,chr){
+           var  len = (String(base || 10).length - String(this).length)+1;
+           return len > 0? new Array(len).join(chr || '0')+this : this;
+        }
+
 
         $orderSubmit.on('click', function() {
             $orderSubmit.prop("disabled", true);
@@ -227,6 +235,22 @@ halumein.orderFormWidget = {
 
         // блок заказ
         $orderPaymentTypeSelect.prop("selectedIndex",0);
+        $orderIsAssignmentSelect.prop("selectedIndex",0);
+
+        // дату в yyyy-mm-dd hh:mm:ss
+        var d = new Date,
+        date = [
+            d.getFullYear().padLeft(),
+            (d.getMonth()+1).padLeft(),
+            (d.getDate()).padLeft(),
+        ].join('-') +' ' + [
+            d.getHours().padLeft(),
+            d.getMinutes().padLeft(),
+            d.getSeconds().padLeft()
+        ].join(':');
+
+        $orderDate.val(date);
+
         $orderFormComment.val('');
         $orderAddationalFields.find('input').val('');
 

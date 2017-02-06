@@ -154,7 +154,7 @@ class OrderFormController extends Controller
     public function actionCartInfo()
     {
         die(json_encode([
-            'cart' => \pistol88\cart\widgets\ElementsList::widget(['columns' => '3', 'showCountArrows' => false, 'type' => ElementsList::TYPE_FULL]),
+            'cart' => \pistol88\cart\widgets\ElementsList::widget(['columns' => '3', 'showCountArrows' => false, 'type' => \pistol88\cart\widgets\ElementsList::TYPE_FULL]),
             'total' => \pistol88\cart\widgets\CartInformer::widget(['htmlTag' => 'div', 'text' => '{c} на {p}']),
             'count' => yii::$app->cart->count,
         ]));
