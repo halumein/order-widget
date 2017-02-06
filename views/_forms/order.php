@@ -80,14 +80,21 @@ use yii\helpers\ArrayHelper;
          </div>
          <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
              <div class="row panel-body">
-                 <div class="col-lg-12">
-                     <div style="display: none;">
-                         <?= $form->field($model, 'status')->label(false)->textInput(['value' => 'new', 'type' => 'hidden', 'maxlength' => true]) ?>
-                     </div>
-                     <?= $form->field($model, 'payment_type_id')->dropDownList($paymentTypes, [
-                         'data-role' => 'payment-type-select',
-                         ]) ?>
-                 </div>
+                <div class="col-lg-12">
+                    <div style="display: none;">
+                        <?= $form->field($model, 'status')->label(false)->textInput(['value' => 'new', 'type' => 'hidden', 'maxlength' => true]) ?>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <?= $form->field($model, 'date')->label(yii::t('order', 'Date'))->textInput(['value' => date('Y-m-d H:i:s')]) ?>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <?= $form->field($model, 'is_assigment')->label(yii::t('order', 'Type'))->dropDownList(['0' => yii::t('order', 'Order'), '1' => yii::t('order', 'Assigment')]) ?>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <?= $form->field($model, 'payment_type_id')->dropDownList($paymentTypes) ?>
+                </div>
+
                  <div class="col-lg-12 col-xs-12">
                      <?= $form->field($model, 'comment')->textArea([
                          'maxlength' => true,
