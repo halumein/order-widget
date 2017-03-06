@@ -199,14 +199,20 @@ halumein.orderFormWidget = {
     },
 
     backToPrimaryState : function() {
-        // чистим блок с корзиной
-        $('.pistol88-cart').fadeOut('fast', function() {
-            $(this).html('Корзина пуста').fadeIn()
-        });
-        $('.pistol88-cart-count').html('0');
-        $('.pistol88-cart-informer').find('.pistol88-cart-count').html('0');
-        $('.pistol88-cart-informer').find('.pistol88-cart-price').find("span").html('0');
-        $('.pistol88-cart-informer').find('.pistol88-cart-price').find("s").remove();
+        // чистим блок с корзиной и блок клиента
+        halumein.commonClient.clearNotify();
+        halumein.commonClient.clearPhone();
+        halumein.commonClient.clearCode();
+        halumein.commonClient.clearClient();
+        halumein.commonClient.removeClientFromSession();
+        pistol88.cart.renderCart();
+        // $('.pistol88-cart').fadeOut('fast', function() {
+        //     $(this).html('Корзина пуста').fadeIn()
+        // });
+        // $('.pistol88-cart-count').html('0');
+        // $('.pistol88-cart-informer').find('.pistol88-cart-count').html('0');
+        // $('.pistol88-cart-informer').find('.pistol88-cart-price').find("span").html('0');
+        // $('.pistol88-cart-informer').find('.pistol88-cart-price').find("s").remove();
 
         // чистим блоки маркетинга
         halumein.orderFormWidget.clearPromocode();

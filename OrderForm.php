@@ -1,5 +1,5 @@
 <?php
-namespace app\widgets\orderForm;
+namespace backend\widgets\orderForm;
 
 use pistol88\order\models\Order;
 use pistol88\order\models\PaymentType;
