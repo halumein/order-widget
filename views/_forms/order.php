@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
                 ]); ?>
     </div>
 
-    <div class="panel panel-default">
+    <!-- <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
                 <a class="heading collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
@@ -45,7 +45,7 @@ use yii\helpers\ArrayHelper;
                 </select>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <?php if ($staffer) { ?>
         <div class="panel panel-default">

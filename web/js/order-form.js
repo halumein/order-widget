@@ -218,7 +218,6 @@ halumein.orderFormWidget = {
         halumein.orderFormWidget.clearPromocode();
         halumein.orderFormWidget.clearCertificate();
 
-
         $orderSubmit.prop("disabled", false);
         $paymentConfirm.prop("disabled", false);
 
@@ -242,6 +241,7 @@ halumein.orderFormWidget = {
         $paymentComment.val('');
         $paymentNoticeBlock.html('');
 
+        halumein.showcase.renderTargetContent('main');
 
         // и костылик (так делать - фу)
         $('[name=service-ident]').val('');
