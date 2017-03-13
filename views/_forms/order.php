@@ -17,6 +17,11 @@ use yii\helpers\ArrayHelper;
          ]
      ]);
  ?>
+    <div class="form-group">
+        <p class="text-center">
+            <small>Enter - создать заказ.</small>
+        </p>
+    </div>
 
     <div class="form-group offer">
          <?= Html::button(Yii::t('order', 'Create order'), [
