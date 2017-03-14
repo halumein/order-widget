@@ -87,7 +87,11 @@ use yii\helpers\ArrayHelper;
              <div class="row panel-body">
                  <div class="col-lg-12">
                      <div style="display: none;">
-                         <?= $form->field($model, 'status')->label(false)->textInput(['value' => 'new', 'type' => 'hidden', 'maxlength' => true]) ?>
+                         <?= $form->field($model, 'status')->label(false)->textInput([
+                             'value' => $paymentRequire ? 'new' : 'payed',
+                             'type' => 'hidden',
+                             'maxlength' => true
+                            ]) ?>
                      </div>
                      <?= $form->field($model, 'payment_type_id')->dropDownList($paymentTypes, [
                          'data-role' => 'payment-type-select',
