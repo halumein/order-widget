@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
                 ]); ?>
     </div>
 
-    <!-- <div class="panel panel-default">
+    <div class="panel panel-default hidden">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
                 <a class="heading collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseTwo">
@@ -44,13 +44,13 @@ use yii\helpers\ArrayHelper;
         <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" data-role="client-form-container">
             <div class="panel-body">
                 <?= \pistol88\order\widgets\ChooseClient::widget(['form' => $form, 'model' => $model]);?>
-                <?php $this->registerJs("pistol88.createorder.updateCartUrl = '".Url::toRoute(['/order-form/cart-info'])."';"); ?>
-                <select class="form-control service-choose-property" data-role="gos-nomer">
+                <?php // $this->registerJs("pistol88.createorder.updateCartUrl = '".Url::toRoute(['/order-form/cart-info'])."';"); ?>
+                <!-- <select class="form-control service-choose-property" data-role="gos-nomer">
                     <option>Автомобиль...</option>
-                </select>
+                </select> -->
             </div>
         </div>
-    </div> -->
+    </div>
 
     <?php if ($staffer) { ?>
         <div class="panel panel-default">

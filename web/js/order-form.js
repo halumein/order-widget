@@ -9,6 +9,11 @@ halumein.orderFormWidget = {
         $clientFormBlock = $('[data-role=client-form-container]');
         $clientGosNomerSelect = $('[data-role=gos-nomer]');
 
+        $commonClientNameBlock = $('[data-role=client-name]');
+        // TODO сделать с этим что-то!
+        $orderClientNameInput = $clientFormBlock.find('#order-client_name');
+
+
         $stafferFormBlock = $('[data-role=staffer-form-container]');
 
         $settings = $('[data-role=settings]');
@@ -41,6 +46,11 @@ halumein.orderFormWidget = {
         $orderSubmit.on('click', function() {
             $orderSubmit.prop("disabled", true);
             if (+$('.pistol88-cart-count').html() > 0) {
+
+                if ($commonClientNameBlock.val() !== "") {
+                    $orderClientNameInput.val($commonClientNameBlock.val());
+                }
+
                 halumein.orderFormWidget.orderCreate($orderForm);
             } else {
                 setTimeout(function() {
@@ -48,6 +58,28 @@ halumein.orderFormWidget = {
                 }, 2000);
             }
         });
+
+        $(document).on('keypress', function(e) {
+            if(e.which == 13) {
+
+                if(e.target.nodeName != 'TEXTAREA' && e.target.nodeName != 'textarea' && e.target.nodeName != 'INPUT' && e.target.nodeName != 'input') {
+                    $orderSubmit.prop("disabled", true);
+                    if (+$('.pistol88-cart-count').html() > 0) {
+
+                        if ($commonClientNameBlock.val() !== "") {
+                            $orderClientNameInput.val($commonClientNameBlock.val());
+                        }
+
+                        halumein.orderFormWidget.orderCreate($orderForm);
+                    } else {
+                        setTimeout(function() {
+                            $orderSubmit.prop("disabled", false);
+                        }, 2000);
+                    }
+                }
+            }
+        });
+
 
         $paymentSumInput.keydown(function (e) {
 	        // Allow: backspace, delete, tab, escape, enter and .
@@ -122,6 +154,8 @@ halumein.orderFormWidget = {
 
     },
 
+
+    // $form и $form.serialize потому что хз сколько там полей может быть из-за динамического добавления
     orderCreate : function($form) {
         var sendUrl = $form.attr('action'),
             serializedFormData = $form.serialize(),
