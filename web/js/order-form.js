@@ -275,6 +275,14 @@ halumein.orderFormWidget = {
         $paymentComment.val('');
         $paymentNoticeBlock.html('');
 
+        //
+        $breadcrumbsItem = $('[data-role=breadcrumbs-button]');
+        $.each($breadcrumbsItem, function(key, val) {
+            var $self = $(val);
+            if ($self.data('target') != 'main') {
+                $self.remove();
+            }
+        })
         halumein.showcase.renderTargetContent('main');
 
         // и костылик (так делать - фу)
